@@ -1,12 +1,10 @@
 package com.example.database;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.*;
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         register=findViewById(R.id.button);
         mail=findViewById(R.id.email);
-        name=findViewById(R.id.name);
+        name=findViewById(R.id.textView);
         pass=findViewById(R.id.password);
         db=openOrCreateDatabase("student_DB",MODE_PRIVATE,null);
         db.execSQL("CREATE TABLE IF NOT EXISTS students (SID INTEGER PRIMARY KEY AUTOINCREMENT, Email TEXT, Name TEXT, Password TEXT)");
@@ -41,7 +39,10 @@ public class MainActivity extends AppCompatActivity {
                 db.execSQL(query);
                 Toast toast=Toast.makeText(getApplicationContext(),"Registered",Toast.LENGTH_LONG);
                 toast.show();
+                Intent intent=new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
             }
+
         });
     }
 
