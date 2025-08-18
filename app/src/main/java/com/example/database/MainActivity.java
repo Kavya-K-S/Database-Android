@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.*;
 
 public class MainActivity extends AppCompatActivity {
-    private Button register;
+    private Button register,nxt;
     private EditText mail,name,pass;
     SQLiteDatabase db;
     @Override
@@ -19,11 +19,19 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         register=findViewById(R.id.button);
+        nxt=findViewById(R.id.button6);
         mail=findViewById(R.id.email);
         name=findViewById(R.id.textView);
         pass=findViewById(R.id.password);
         db=openOrCreateDatabase("student_DB",MODE_PRIVATE,null);
         db.execSQL("CREATE TABLE IF NOT EXISTS students (SID INTEGER PRIMARY KEY AUTOINCREMENT, Email TEXT, Name TEXT, Password TEXT)");
+        nxt.setOnClickListener(new View.OnClickListener(){
+                @Override
+            public void onClick(View view){
+                    Intent intent=new Intent(MainActivity.this, MainActivity2.class);
+                    startActivity(intent);
+                }
+        });
         register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -44,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
     }
 
 }
